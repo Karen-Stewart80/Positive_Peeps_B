@@ -10,11 +10,8 @@ class PostSchema(ma.SQLAlchemyAutoSchema):
     post_name = ma.String(required=True, validate=Length(min=5))
     post_description = ma.String(required=True, validate=Length(min=5))
     account_active = ma.Boolean(required=True)
-    front_end = ma.Boolean(required=True)
-    back_end = ma.Boolean(required=True)
-    full_stack = ma.Boolean(required=True)
-    completed = ma.Boolean(required=True)
-    post_github = ma.String(required=True, validate=Length(min=5))
+   
+
     profile = ma.Nested(ProfileSchema)
 
 post_schema = PostSchema()
