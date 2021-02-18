@@ -57,7 +57,6 @@ def profiles_update(user, id):
         return abort(401, description="Unauthorised to update")
     profile.update(profile_fields)
 
-    
     db.session.commit()
 
     return jsonify(profile_schema.dump(profile[0]))

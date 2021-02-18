@@ -23,7 +23,6 @@ def seed_db():
     from models.Users import Users
     from main import bcrypt
     from models.Post import Post
-    from models.Messages import Messages
     import random
 
     faker = Faker()
@@ -48,7 +47,7 @@ def seed_db():
         profile.lname = faker.last_name()
         profile.account_active=faker.boolean()
         profile.user_id = i+1
-       
+
         db.session.add(profile)
         profiles.append(profile)
     db.session.commit()
@@ -57,22 +56,10 @@ def seed_db():
         new_post = Post()
         new_post.post_name = faker.name()
         new_post.post_description = faker.catch_phrase()
-        new_post.account_active = random.choice(true_or_false)
-      
-        new_post.completed = random.choice(true_or_false)
-    
         new_post.profile_id = random.choice(profiles).profileid
         posts.append(new_post)
         db.session.add(new_post)
     db.session.commit()
         
-    for i in range(50):
-        new_message = Messages()
-        new_message.post_id = random.choice(posts).postid
-        new_message.profile_id = random.choice(profiles).profileid
-        new_message.messages = faker.catch_phrase()
-        new_message.timestamp = faker.date_between(start_date = "-1y", end_date = "+1y")
-        db.session.add(new_message)
-    db.session.commit()
 
     print("Tables seeded")

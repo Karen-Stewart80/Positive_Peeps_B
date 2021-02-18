@@ -1,6 +1,7 @@
 import unittest                                                        
 from main import create_app, db                                        
-from models.User import User                                      
+from models.Users import Users
+                              
 
 class TestProfiles(unittest.TestCase):                                     
     @classmethod
@@ -21,17 +22,17 @@ class TestProfiles(unittest.TestCase):
 
 
     def test_user_register(self):
-        response = self.client.post("/user/register",                   
+        response = self.client.post("/auth/register",                   
         json = {                                                        
-            "email": "test6@test.com",
+            "email": "test13@test.com",
             "password": "123456"
         })
         self.assertEqual(response.status_code, 200)                     
         data = response.get_json()                                      
 
-        response = self.client.post("/user/login",                      
+        response = self.client.post("/auth/login",                      
         json = {                                                        
-            "email": "test6@test.com",
+            "email": "test13@test.com",
             "password": "123456"
         })                    
         data = response.get_json()                                      
@@ -39,7 +40,7 @@ class TestProfiles(unittest.TestCase):
 
 
     def test_user_login(self):
-        response = self.client.post("/user/login",                       
+        response = self.client.post("/auth/login",                       
         json = {                                                         
             "email": "test1@test.com",
             "password": "123456"

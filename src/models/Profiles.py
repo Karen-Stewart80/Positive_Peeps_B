@@ -11,7 +11,7 @@ class Profiles(db.Model):
     lname = db.Column(db.String(), nullable=False)
     account_active = db.Column(db.Boolean(), default = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    post = db.relationship("Post", backref="profile", lazy="dynamic"
+    post = db.relationship("Post", backref="profile", lazy="dynamic")
     post = db.relationship("Post", cascade="all, delete")
 
 def __repr__(self):

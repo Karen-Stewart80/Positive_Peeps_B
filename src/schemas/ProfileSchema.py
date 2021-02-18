@@ -6,15 +6,13 @@ from schemas.UsersSchema import UsersSchema
 class ProfileSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Profiles
-        load_only =["admin"]
+
     username = ma.String(required=True, validate=Length(min=1))
     fname = ma.String(required=True, validate=Length(min=1))
     lname = ma.String(required=True, validate=Length(min=1))
     account_active = ma.Boolean(required=True)
     
     user = ma.Nested(UsersSchema)
-    
-    admin = ma.Boolean()
 
 
 profile_schema = ProfileSchema()
