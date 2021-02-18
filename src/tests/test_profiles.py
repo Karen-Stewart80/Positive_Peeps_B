@@ -57,14 +57,15 @@ class TestProfiles(unittest.TestCase):
         response = self.client.post("/profiles/",                       
         json = data,                                                    
         headers = headers_data)  
-
+        data = response.get_json()
+        print(data)
         self.assertEqual(response.status_code, 200)
 
         self.assertIsInstance(data, dict)
-        # self.assertTrue(bool("userid" in data.keys()))
+        self.assertTrue(bool("profileid" in data.keys()))
 
-        # profiles = Profiles.query.get(data["users"]["id"])
-        # self.assertIsNotNone(profiles)
+        profiles = Profiles.query.get(data["user"]["id"])
+        self.assertIsNotNone(profiles)
 
     # def test_profiles_delete(self):
     #     response = self.client.post("/auth/register",                   
