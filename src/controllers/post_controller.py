@@ -14,19 +14,8 @@ posts = Blueprint("post", __name__, url_prefix="/post")
 @posts.route("/", methods=["GET"])
 def post_index():
     post = db.session.query(Post).order_by(Post.post_name).all()
-    #return jsonify(posts_schema.dump(post))
-    return render_template("home_page.html", posts= post)
-
-
-@posts.route("/<string:account_active>", methods=["GET"])
-
-def post_front_end(account_active):
-    query = db.session.query(Post.account_active, label("active", func.count(Post.postid))).filter(Post.completed == False).group_by(Post.account_active).all()
-    #return jsonify(posts_schema.dump(Post))
-    # query = query.filter(Post.front_end == True)
-    # posts = query.all()
-    return jsonify(query)
-
+    return jsonify(posts_schema.dump(post))
+    #return render_template("home_page.html", posts= post)
 
 
 @posts.route("/", methods=["POST"])
@@ -40,12 +29,6 @@ def post_create(user=None):
     new_post = Post()
     new_post.post_name = post_fields["post_name"]
     new_post.post_description = post_fields["post_description"]
-    new_post.account_active = post_fields["account_active"]
-    new_post.front_end = post_fields["front_end"]
-    new_post.back_end = post_fields["back_end"]
-    new_post.full_stack = post_fields["full_stack"]
-    new_post.completed = post_fields["completed"]
-    new_post.post_github = post_fields["post_github"]
 
     profile.post.append(new_post)
 
@@ -71,7 +54,6 @@ def post_update(post_name, user=None):
     if post.count() != 1:
         return abort(401, description="Unauthorised to update this user")
     post.update(post_fields)
-
 
     db.session.commit()
 

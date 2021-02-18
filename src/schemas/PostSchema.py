@@ -9,8 +9,7 @@ class PostSchema(ma.SQLAlchemyAutoSchema):
 
     post_name = ma.String(required=True, validate=Length(min=5))
     post_description = ma.String(required=True, validate=Length(min=5))
-    account_active = ma.Boolean(required=True)
-   
+
 
     profile = ma.Nested(ProfileSchema)
 
