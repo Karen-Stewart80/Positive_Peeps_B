@@ -2,10 +2,13 @@ import unittest
 from main import create_app, db
 from models.Profiles import Profiles
 from models.Users import Users
+# import os
 
 class TestProfiles(unittest.TestCase):
     @classmethod
     def setUp(cls):
+        # if os.environ.get("FLASK_ENV") != "testing":
+        #     raise EnvironmentError("FLASK_ENV is not testing")
         cls.app = create_app()
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
