@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify, abort, render_template, redirect,
 from models.Users import Users
 from main import bcrypt, db
 from flask_jwt_extended import create_access_token
-from flask_login import login_user, current_uesr, logout_user, login_required
+# from flask_login import login_user, current_uesr, logout_user, login_required
 from datetime import timedelta
 
 auth = Blueprint('auth', __name__, url_prefix="/auth")

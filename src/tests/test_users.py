@@ -6,7 +6,7 @@ from models.Users import Users
 class TestProfiles(unittest.TestCase):                                     
     @classmethod
     def setUp(cls):                                                     
-        cls.app = create_app()                                          
+        # cls.app = create_app()                                          
         cls.app_context = cls.app.app_context()                         
         cls.app_context.push()                                          
         cls.client = cls.app.test_client()                              
