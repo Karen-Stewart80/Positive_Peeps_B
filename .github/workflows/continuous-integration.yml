@@ -49,7 +49,7 @@ jobs:
                /home/github-actions/Positive_Peeps_B/./script.sh
                mv /home/github-actions/Positive_Peeps_B/src/migrations /home/github-actions/Positive_Peeps_B/
                cd /home/github-actions/Positive_Peeps_B
-               EXPORT FLASK_APP=src/main.py
+               export FLASK_APP=src/main.py
                flask db-custom drop
                flask db upgrade
                flask db-custom seed
