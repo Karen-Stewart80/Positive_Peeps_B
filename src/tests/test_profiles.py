@@ -2,7 +2,7 @@ import unittest
 from main import create_app, db
 from models.Profiles import Profiles
 from models.Users import Users
-# import os
+import os
 
 class TestProfiles(unittest.TestCase):
     @classmethod
