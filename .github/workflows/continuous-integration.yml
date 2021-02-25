@@ -47,9 +47,11 @@ jobs:
                pip install -r /home/github-actions/Positive_Peeps_B/requirements.txt
                chmod +x /home/github-actions/Positive_Peeps_B/script.sh
                /home/github-actions/Positive_Peeps_B/./script.sh
-               cd /home/github-actions/Positive_Peeps_B/src
+               mv /home/github-actions/Positive_Peeps_B/src/migrations /home/github-actions/Positive_Peeps_B/
+               cd /home/github-actions/Positive_Peeps_B
+               EXPORT FLASK_APP=src/main.py
                flask db-custom drop
                flask db upgrade
                flask db-custom seed
-              #  gunicorn -b 0.0.0.0:5000 -w 3 "main:create_app()" 
+            
       
