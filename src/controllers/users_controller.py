@@ -1,21 +1,33 @@
-from flask import Blueprint
 from schemas.UsersSchema import user_schema, users_schema
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for
 from models.Users import Users
 from main import bcrypt, db
 from flask_jwt_extended import create_access_token
+from flask_login import login_user, current_uesr, logout_user, login_required
 from datetime import timedelta
 
 auth = Blueprint('auth', __name__, url_prefix="/auth")
 
 @auth.route("/register", methods=["POST"])
 def auth_register():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    # print(username)
+    # print(password)
     user_fields = user_schema.load(request.json)
 
     user = Users.query.filter_by(email=user_fields["email"]).first()
 
     if user:
         return abort(400, description="User already")
+
+
+# @auth.route('/signup', methods=[GET])
+# def signup():
+#     return render_template('signup.html')
+    
+
+
     
     # if current_user.is_authenticated:
     #     return redirect(url_for('home'))
@@ -73,3 +85,4 @@ def auth_login():
     access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
 
     return jsonify({ "token": access_token })
+   # return redirect(url_for())
