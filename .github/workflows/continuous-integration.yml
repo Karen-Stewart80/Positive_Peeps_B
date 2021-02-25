@@ -27,4 +27,29 @@ jobs:
           echo DB_URI=sqlite:///:memory: >> .env
           cd src
           python -m unittest discover tests/
+
+  deployment:
+       needs: test_suite
+       runs-on: ubuntu-latest
+       steps:
+         - name: Fresh clone & repo install
+           uses: appleboy/ssh-action@master
+           with:
+             host: 107.22.146.16
+             username: github-actions
+             key: ${{ secrets.EC2 }}
+             port: 22
+             script: |
+               rm -rf Positive_Peeps_B
+               git clone https://github.com/Karen-Stewart80/Positive_Peeps_B.git
+               python3 -m venv /home/github-actions/Positive_Peeps_B/venv
+               source /home/github-actions/Positive_Peeps_B/venv/bin/activate
+               pip install -r /home/github-actions/Positive_Peeps_B/requirements.txt
+               chmod +x /home/github-actions/Positive_Peeps_B/script.sh
+               /home/github-actions/Positive_Peeps_B/./script.sh
+               cd /home/github-actions/Positive_Peeps_B/src
+               flask db-custom drop
+               flask db upgrade
+               flask db-custom seed
+              #  gunicorn -b 0.0.0.0:5000 -w 3 "main:create_app()" 
       
