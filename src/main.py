@@ -6,15 +6,22 @@ from marshmallow.exceptions import ValidationError
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager
+#from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from flask_login import LoginManager            #added
+from flask_wtf.csrf import CSRFProtect
 
 
 db = SQLAlchemy()
 ma = Marshmallow()
 bcrypt = Bcrypt()
-jwt = JWTManager()
-migrate=Migrate()
+#jwt = JWTManager()
+migrate = Migrate()
+#login_manager.init_app(app)
+login_manager = LoginManager()           #added
+csrf = CSRFProtect()
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -23,8 +30,17 @@ def create_app():
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
-    jwt.init_app(app)
+    #jwt.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)      #added
+    login_manager.login_view = "auth.login"  #added
+    csrf.init_app(app)
+
+    from models.Users import get_user  #added
+
+    @login_manager.user_loader  #added
+    def load_user(user_id):
+        return get_user(user_id)
 
     from commands import db_commands
     app.register_blueprint(db_commands)

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div>
+        <h3>Add profile</h3>
+        <div>
+            <form action="{{ url_for('profiles.profile_create') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="text" name="username" placeholder="User Name" autofocus="">
+                <input type="text" name="fname" placeholder="First Name">
+                <input type="text" name="lname" placeholder="Last Name">
+            
+                <button>Add Profile</button>
+            </form>
+            <a href="post_index.html"><button>Cancel</button></a>
+        </div>
+    </div>
+{% endblock %}

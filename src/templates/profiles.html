@@ -1,0 +1,19 @@
+
+{% extends "layout.html" %}
+
+{% block content%}        
+    <h3>{{profile.username}}</h3>
+    <h4>{{profile.fname}}</h4>
+    <h4>{{profile.lname}}</h4>
+
+
+    <a href="{{ url_for('profiles.profiles_delete', id=profile.profileid) }}"><button>Delete Profile</button></a>
+    
+  
+
+        
+    
+  
+    <a href="/profiles">Back</a>
+    
+{% endblock %}

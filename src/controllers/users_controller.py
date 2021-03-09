@@ -2,21 +2,38 @@ from schemas.UsersSchema import user_schema, users_schema
 from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for
 from models.Users import Users
 from main import bcrypt, db
-from flask_jwt_extended import create_access_token
-# from flask_login import login_user, current_uesr, logout_user, login_required
+#from flask_jwt_extended import create_access_token
+from flask_login import login_user, current_user, logout_user, login_required  #added
 from datetime import timedelta
 
-auth = Blueprint('auth', __name__, url_prefix="/auth")
+auth = Blueprint('auth', __name__)
+
+@auth.route("/", methods=["GET"])                   #added
+def main_page():
+    return redirect(url_for('post.post_index'))
+
+@auth.route('/signup', methods=['GET']) #added'
+def signup():
+    return render_template('signup.html')
+
+@auth.route('/login', methods=['GET'])
+def login():
+    return render_template('login.html')
+
+@auth.route('/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('post.post_index'))
 
 @auth.route("/register", methods=["POST"])
 def auth_register():
-    username = request.form.get('username')
+    email = request.form.get('email')
     password = request.form.get('password')
-    # print(username)
-    # print(password)
-    user_fields = user_schema.load(request.json)
+  
+    #user_fields = user_schema.load(request.json)
 
-    user = Users.query.filter_by(email=user_fields["email"]).first()
+    user = Users.query.filter_by(email=email).first()
 
     if user:
         return abort(400, description="User already")
@@ -25,9 +42,6 @@ def auth_register():
 # @auth.route('/signup', methods=[GET])
 # def signup():
 #     return render_template('signup.html')
-    
-
-
     
     # if current_user.is_authenticated:
     #     return redirect(url_for('home'))
@@ -47,18 +61,24 @@ def auth_register():
     # return render_template('register.html', title='Register', form=form)
 
     user = Users()
-    user.email = user_fields["email"]
-    user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
+    #user.email = user_fields["email"]
+   # user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
+
+    user.email = email
+    user.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
     db.session.add(user)
     db.session.commit()
 
-    return jsonify(user_schema.dump(user))
+    #return jsonify(user_schema.dump(user))
+    return redirect(url_for('auth.login'))  #added
 
 
 @auth.route("/login", methods=["POST"])
 def auth_login():
 
+    email = request.form.get('email')
+    password = request.form.get('password')
     # if current_user.is_authenticated:
     #     return redirect(url_for('home'))
     # form = LoginForm()
@@ -74,15 +94,19 @@ def auth_login():
     #         flash('Login Unsuccessful. Please check email and password', 'danger')
     # return render_template('login.html', title='Login', form=form)
 
-    user_fields = user_schema.load(request.json)
+    #user_fields = user_schema.load(request.json)
 
-    user = Users.query.filter_by(email=user_fields["email"]).first()
+    user = Users.query.filter_by(email=email).first()
 
-    if not user or not bcrypt.check_password_hash(user.password, user_fields["password"]):
+    if not user or not bcrypt.check_password_hash(user.password, password):  #changed
         return abort(401, description="Incorrect username and password")
+    login_user(user)
+    print(current_user.email)
 
-    expiry = timedelta(days=1)
-    access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
+    #expiry = timedelta(days=1)
+    #access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
 
-    return jsonify({ "token": access_token })
-   # return redirect(url_for())
+    #return jsonify({ "token": access_token })
+    return redirect(url_for('post.post_index'))
+
+   

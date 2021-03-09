@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content%} 
+<h2>Posts</h2>          
+    {% for post in posts %}
+ 
+        <h3>{{post.post_name}}</h3>
+        <h4>{{post.post_description}}</h4>
+
+        <a href="{{ url_for('post.post_show', id=post.postid) }}">See Post</a>"
+
+       
+      
+    {% endfor %}
+{% endblock %}

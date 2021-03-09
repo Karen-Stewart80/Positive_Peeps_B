@@ -8,7 +8,11 @@ class Post(db.Model):
     post_description= db.Column(db.String(), nullable=False)
     
     profile_id = db.Column(db.Integer, db.ForeignKey("profiles.profileid"), nullable=False)
-    
+    # profile = db.relationship(
+    #     "Profile",
+    #     backref="post",
+    #     cascade="all, delete"
+    # )           #added
 
 def __repr__(self):
     return f"<Post {self.post}>"

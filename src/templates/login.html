@@ -1,4 +1,16 @@
 {% extends "layout.html" %}
+
 {% block content %}
-    <h1>About Page!<h1>
-{% endblock content %}
+    <div>
+        <h3>Log in</h3>
+        <div>
+            <form action="{{ url_for('auth.auth_login') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="text" name="email" placeholder="Email" autofocus="">
+                <input type="password" name="password" placeholder="Password">
+                <button>Log in</button>
+            </form>
+        </div>
+        <a href="user_index.html"><button>Cancel</button></a>
+    </div>
+{% endblock %}

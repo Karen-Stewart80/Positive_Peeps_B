@@ -1,15 +1,19 @@
-{extends "layout.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
     <div>
         <h3>Sign Up</h3>
-    <div>
-        <form action="{{url_for('auth.auth_register') }}method="POST">
-            <input type="text", name="username" placeholder="Username" autofocus="">
-            <input type="password" name="password" placeholder="Password">
-            <button>Sign up</button>
-        </form>
-    </div>
+        <p id="pledge">By joining Positive Peeps, I pledge to stay positive in all my posts, messages, profile and interactions with Positive Peeps. I understand that Positive Peeps is a diverse community and will treat all with respect and positivity. By creating an account or logging in, I am agreeing to abide by this pledge.</p>
+
+        <div>
+            <form action="{{url_for('auth.auth_register') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="text", name="email" placeholder="Email" autofocus="">
+                <input type="password" name="password" placeholder="Password">
+                <button>Sign up</button>
+            </form>
+        </div>
+     <a href="/post"><button>Cancel</button></a> 
     </div>
 
 {% endblock %}

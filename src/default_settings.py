@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    JWT_SECRET_KEY = "cat"
-    MAX_CONTENT_LENGTH = 1 * 1024 * 1024
+    #JWT_SECRET_KEY = "cat"
+   # MAX_CONTENT_LENGTH = 1 * 1024 * 1024
+    SECRET_KEY = "learning flask login"
 
     @property
     def SQLALCHEMY_DATABASE_URI(self):
@@ -21,13 +22,13 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 
-class ProductionConfig(Config):
+class ProductionConfig(Config):     #change from jwt
     @property
-    def JWT_SECRET_KEY(self):
-        value = os.environ.get("JWT_SECRET_KEY")
+    def SECRET_KEY(self):
+        value = os.environ.get("SECRET_KEY")
 
         if not value:
-            raise ValueError("JWT Secret Key is not set")
+            raise ValueError("Secret Key is not set")
         
         return value
 

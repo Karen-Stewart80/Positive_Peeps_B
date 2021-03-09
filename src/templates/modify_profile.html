@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div>
+        <h3>Update Profile</h3>
+        <div>
+            <form action="{{ url_for('profiles.profile_update', id=profile.id) }}" method="PUT">
+                <input type="text" name="username" value="{{ profile.username }}" placeholder="User Name" autofocus="">
+                <input type="text" name="fname" value="{{ profile.fname }}" placeholder="First Name">
+                <input type="text" name="lname" value="{{ profile.lname }}" placeholder="Last Name">
+            
+                <button>Update Profile</button>
+            </form>
+            <a href="profile_index.html"><button>Cancel</button></a>
+        </div>
+    </div>
+{% endblock %}
