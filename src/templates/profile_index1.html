@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content%}   
+<div class="col-xl-8">
+</br>
+<div class="container-fluid align-content-lg-center">    <h1>Profiles</h1> </div>
+</br>     
+    {% for profile in profiles %}
+        <h3>{{profile.username}}</h3>
+        <h4>{{profile.fname}}</h4>
+        <h4>{{profile.lname}}</h4>
+
+        <a href="{{ url_for('profiles.profiles_show', username=profile.username) }}">More details</a>
+        
+    {% endfor %}
+</div>
+
+{% endblock %}
+{% extends "layout.html" %}
+{% block content %}
+
