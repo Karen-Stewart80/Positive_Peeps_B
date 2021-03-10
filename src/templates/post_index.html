@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content%} 
-<h2>Posts</h2>          
+</br>
+<h2>Posts</h2> 
+<div class="col-xl-8">
+</br>
+<div class="container-fluid align-content-lg-center">    <h1>Otaku Bulletin Board</h1> </div>
+</br>         
     {% for post in posts %}
  
         <h3>{{post.post_name}}</h3>
@@ -12,4 +17,5 @@
        
       
     {% endfor %}
+</div>
 {% endblock %}

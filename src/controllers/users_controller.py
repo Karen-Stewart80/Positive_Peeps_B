@@ -8,6 +8,7 @@ from datetime import timedelta
 
 auth = Blueprint('auth', __name__)
 
+@auth.route("/home", methods=["GET"])   
 @auth.route("/", methods=["GET"])                   #added
 def main_page():
     # return redirect(url_for('post.post_index'))

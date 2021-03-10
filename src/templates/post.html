@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
-{% block content%}        
+{% block content%}      
+<div>
     <h3>{{post.post_name}}</h3>
     <h4> {{post.post_description}}</h4>
 
@@ -12,4 +13,5 @@
        
     {% endif%}
     <a href="/post">Back</a>
+</div>  
 {% endblock %}
