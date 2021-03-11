@@ -7,9 +7,10 @@ from flask_login import login_user, current_user, logout_user, login_required  #
 from datetime import timedelta
 
 auth = Blueprint('auth', __name__)
+ 
 
-@auth.route("/home", methods=["GET"])   
-@auth.route("/", methods=["GET"])                   #added
+@auth.route("/", methods=["GET"])  
+@auth.route("/home", methods=["GET"])                   #added
 def main_page():
     # return redirect(url_for('post.post_index'))
     return render_template('home.html')
