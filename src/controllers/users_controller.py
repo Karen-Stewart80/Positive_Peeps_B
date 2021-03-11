@@ -42,27 +42,6 @@ def auth_register():
         return abort(400, description="User already")
 
 
-# @auth.route('/signup', methods=[GET])
-# def signup():
-#     return render_template('signup.html')
-    
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('home'))
-
-    # form = RegistrationForm()
-
-    # if form.validate_on_submit():
-    #     user = Users()
-    #     user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-    #     user.email = form.email.data
-    #     #user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     flash('Your account has been created! You are now able to log in', 'success')
-    #     return redirect(url_for('login'))
-
-    # return render_template('register.html', title='Register', form=form)
-
     user = Users()
     #user.email = user_fields["email"]
    # user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
