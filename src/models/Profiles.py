@@ -12,7 +12,7 @@ class Profiles(db.Model):
     account_active = db.Column(db.Boolean(), default = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     # post = db.relationship("Post", backref="profile", lazy="dynamic")
-    post = db.relationship("Post", backref="profile", lazy="dynamic")
+    post = db.relationship("Post", backref="profile", lazy="raise")
 
 
 def __repr__(self):

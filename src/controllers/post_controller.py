@@ -68,7 +68,8 @@ def post_create():
 @posts.route("/<int:id>", methods=["GET"])
 def post_show(id):
     #Return a single user
-    post = Post.query.filter_by(postid = id).first()
+    # post = Post.query.filter_by(postid = id).first()
+    post = Post.query.options(joinedload(Post.profile)).get(id)
     #return jsonify(post_schema.dump(post))
     return render_template("post.html", post=post)
 
