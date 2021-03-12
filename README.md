@@ -183,6 +183,14 @@ Tasks have been divided into teams. Project management for the running and organ
 ![Taskdel4](docs/task_delegation/taskdel.4.png)
 
 
+### Manual Testing
+
+The following are images of the manual testing of the application performed by developers and other users. These were carried out during production and deployment of the application
+
+![Test1](docs/manual_testing/manual_testing.1.png)
+![Test2](docs/manual_testing/manual_testing.2.png)
+![Features](docs/manual_testing/features.png)
+
 
 
 ### Handling the privacy of user data and security features
