@@ -54,7 +54,8 @@ def post_create():
     new_post = Post()
     new_post.post_name = post_name
     new_post.post_description = post_description
-    new_post.profile_id = profile.profileid
+    new_post.profile_id = current_user.id
+    # new_post.profile_id = profile.profileid
 
     #profile.post.append(new_post)
 

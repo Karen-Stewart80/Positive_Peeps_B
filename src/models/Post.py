@@ -7,7 +7,7 @@ class Post(db.Model):
     post_name = db.Column(db.String(), nullable=False)
     post_description= db.Column(db.String(), nullable=False)
     
-    profile_id = db.Column(db.Integer, db.ForeignKey("profiles.profileid"), nullable=False)
+    profile_id = db.Column(db.Integer, db.ForeignKey("profiles.profileid"))
     # profile = db.relationship(
     #     "Profile",
     #     backref="post",
