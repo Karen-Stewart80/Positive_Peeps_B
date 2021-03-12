@@ -4,7 +4,7 @@
 
 ### Description
 
-Positive Peeps is a social app that allows users to connect with each other. The problem with most social apps is the amount of trolling, negative comments and bullying that goes on between users. To solve this issue, I've created Positive Peeps, which users pledge to only create positive posts and messages and abstain from negative interactions. Allowing users to be a part of an uplifting community without the fear of harassment and negative judgement.
+Positive Peeps is a social app that allows users to connect with each other. The problem with most social apps is the amount of trolling, negative comments and bullying that goes on between users. To solve this issue, I've created Positive Peeps, which users pledge to only create positive posts abstain from negative interactions. Allowing users to be a part of an uplifting community without the fear of harassment and negative judgement. For this reason the initial application will not have profile images, the option to delete or change/update profiles or the option of sending messages. This way the initial version is a higher level of protection from insensitive messages or images or people changing their profile after posting something unsavoury, so there is accountability. Posts can be deleted though. The 2.0 version in the future will offer those options for those wanting a less restrictive service. 
 
 ### Instructions
 **Install python 3.9**
@@ -38,29 +38,48 @@ $ flask run
 
 **Testing end points**
 
-email: test0@test.com
-password: 123456
+to perform tests
 
-Copy the JWT token generated and perform actions. This is the admin user able to perform admin rights in the database dump end points. Faker and random generated data is used in the database.
+cd into src folder
+cd src
+
+
+in terminal
+set environment
+export FLASK_ENV=testing
+
+python -m unittest discover tests/
+
+### How to use website
+
+Step 1 - enter positive-peeps.tk in web browser
+Step 2 - Press sign up button. Enter email and password and click sign up button
+Step 3 - Press log in button. Enter email and password (the same used to sign up) and click log in button
+Step 4 - Press Create a new Profile button. Enter username, first name and last name and click create profile
+Step 5 - Press Create a new Post button. Enter name of Post and enter your post and click create post button
+
+There are options to go back or cancel if needed. You must have a profile to create a post.
+
+
 
 
 ### CICD pipeline
-Code will be pushed to Github repository. Unittest will run tests.
+Code will be pushed to Github repository and use git-hub actions.. Unittest will run tests.
+Continuous-integration yaml runs the tests, and then does a fresh install of the application onto an ec2 instance with gunicorn running as a background system. With a script installed to copy the env file from an s3 bucket. Route 53 handling the routing of the webpage, nginix running as a web server and have an ssl cert
 
 
 #### Purpose
 
-The purpose of Positive Peeps is to create a social website that has a positive impact on it's users. Cyber bullying has had a detrimental impact on mental health, whether it be body-shaming or ridiculing or just making people feel like they aren't enough. Positive Peeps aims to create a welcoming, positive social community. People can  create  their own profile with their image, create positive vibe posts and send positive messages to each other. This allows members of all ages to feel safe online while still being able to be social.
+The purpose of Positive Peeps is to create a social website that has a positive impact on it's users. Cyber bullying has had a detrimental impact on mental health, whether it be body-shaming or ridiculing or just making people feel like they aren't enough. Positive Peeps aims to create a welcoming, positive social community. People can  create  their own profile and create positive vibe posts. This allows members of all ages to feel safe online while still being able to be social.
 
 #### Functionality/features
 
 An interactive website 
-A simple 5 page application
+A simple profile and post social media application
 Email and password registration and signing in
 Positive attitude and behaviour pledge when joining
-Profile details and image update, read, create and delete
-Posts create, read, update and delete
-Messages create, read and delete
+Profile details read and create 
+Posts create, read and delete
 Logout feature when not in use
 
 #### Target Audience
@@ -69,17 +88,26 @@ Positive Peeps website is targeted at users of all ages who wish to be social on
 
 ### Tech Stack
 
+
+sql alchemy is the ORM
+marshmallow is the serializer,
+gunicorn is the application server
+nginix is the web server
+github for source control
+github-actions for CI/CD
+flask for the backend framwork
+
 Front-end Technologies: HTML5, CSS, Python
-Front-end Frameworks: ReactJS
 Backend Technologies: Python
-Backend Frameworks: Marshmellow, Jinja, Flask 
+Backend Frameworks: Marshmallow, Jinja, Flask 
 Database and Access Library: PostgreSQL
-Deployment: AWS EC2
+Deployment: AWS EC2 S3
 
 
 ### Wireframes
 
-Wireframes of Positive Peeps showing a Login Landing Page. A Profile Page where members can upload an image and describe themselves. A Post Page where users can create and share positive posts with other users. A Messages page where users can send private messages to each other and a Friends page displaying other users  they are connected with.
+The wireframes are of the future 2.0 version of the app, that also include this current lite versions features of posts, profiles, login and sign up.
+
 
 ![Landing Page](docs/wireframes/Landing_wireframe.png)
 ![Profile Page](docs/wireframes/Profile_wireframe.png)
@@ -99,7 +127,8 @@ The user sees the frontend and it communicates with the backend that is stored i
 
 ### Data Flow Diagram
 
-The Data Flow Diagram is for the Application Positive Peeps.
+The Data Flow Diagram is for the Application Positive Peeps future 2.0 version, that also includes the features of this lite version which includes the features of post, profile, signup and login. 
+
 It demonstrates the flow of data from the External Entity, the user, throughout the application. From the User, it shows the Processes Create, Update/Add, Read and Delete for the Profiles, Messages, Friends and Posts all which have their data in their own tables. Arrows show the direction of data flow. Yellow circles are for CRUD process, pink rectangles are for data stores and the green large rectangle is for the user/external entity.
 
 ![Data Flow Diagram](docs/data_flow_diagram.pdf) 
@@ -136,6 +165,23 @@ List of tasks for T4A2- A and the start of tasks for the upcoming assignment T4A
 ![Task11](docs/trello_tasks/task11.png)
 ![Task12](docs/trello_tasks/task12.png)
 ![Task13](docs/trello_tasks/task13.png)
+![Task14](docs/trello_tasks/task14.png)
+![Task15](docs/trello_tasks/task15.png)
+![Task16](docs/trello_tasks/task16.png)
+![Task17](docs/trello_tasks/task17.png)
+![Task18](docs/trello_tasks/task18.png)
+![Task19](docs/trello_tasks/task19.png)
+![Task20](docs/trello_tasks/task20.png)
+
+### Task Delegation
+
+Tasks have been divided into teams. Project management for the running and organisation of the project, Front end Developers for the User interface and wireframes and Htmls, Backend developers for the framework and function coding of the app, DevOps for the CICD pipeline, yaml file, github actions, AWS services such as EC2, S3 and route 53. See following delegation boards:
+
+![Taskdel1](docs/task_delegation/taskdel.1.png)
+![Taskdel2](docs/task_delegation/taskdel.2.png)
+![Taskdel3](docs/task_delegation/taskdel.3.png)
+![Taskdel4](docs/task_delegation/taskdel.4.png)
+
 
 
 
